@@ -913,6 +913,25 @@ body {
     object-fit: contain;
 }
 
+.secret-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 28px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #d8794e, #bd5938);
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(150, 70, 40, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.secret-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 16px rgba(150, 70, 40, 0.3);
+}
 /* ========================================
    ADAPTACIÓN A CELULARES
 ======================================== */
