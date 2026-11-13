@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f8c5d8">
+    <title>Para Sammy 💗</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- FONDO ROSADO -->
+    <div class="background" id="background"></div>
+
+    <!-- ESCENA DEL REGALO -->
+    <main class="intro" id="intro">
+
+        <h1>Un regalo especial 💗</h1>
+        <p class="subtitle">Hay una sorpresa esperando por ti...</p>
+
+        <div class="scene" id="scene">
+            <div class="gift" id="gift">
+
+                <!-- CAJA 3D COMPLETO -->
+                <div class="gift-body">
+                    <div class="face front">
+                        <div class="ribbon vertical"></div>
+                        <div class="ribbon horizontal"></div>
+                    </div>
+
+                    <div class="face back">
+                        <div class="ribbon vertical"></div>
+                        <div class="ribbon horizontal"></div>
+                    </div>
+
+                    <div class="face right">
+                        <div class="ribbon vertical"></div>
+                        <div class="ribbon horizontal"></div>
+                    </div>
+                    <div class="face left">
+                        <div class="ribbon vertical"></div>
+                        <div class="ribbon horizontal"></div>
+                    </div>
+                    <div class="face top"></div>
+                    <div class="face bottom">
+                        <span class="number">16</span>
+                    </div>
+                </div>
+
+                <!-- TAPA CON LAZO -->
+                <div class="lid">
+                    <div class="lid-top-face">
+                        <div class="lid-ribbon-v"></div>
+                        <div class="lid-ribbon-h"></div>
+                        <div class="flat-bow">
+                            <div class="bow-loop-flat left-loop"></div>
+                            <div class="bow-loop-flat right-loop"></div>
+                            <div class="bow-knot-flat"></div>
+                        </div>
+                    </div>
+
+                    <div class="lid-cap lid-front-face">
+                        <div class="lid-side-ribbon"></div>
+                    </div>
+
+                    <div class="lid-cap lid-back-face">
+                        <div class="lid-side-ribbon"></div>
+                    </div>
+
+                    <div class="lid-cap lid-left-face">
+                        <div class="lid-side-ribbon"></div>
+                    </div>
+
+                    <div class="lid-cap lid-right-face">
+                        <div class="lid-side-ribbon"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="shadow"></div>
+
+        <p class="instruction">
+            ✨ Gira el regalo y descubre el código ✨
+        </p>
+
+        <p class="open-hint">Toca el regalo para abrirlo</p>
+
+    </main>
+
+    <!-- PANTALLA DE LA SORPRESA -->
+    <section class="celebration" id="celebration">
+
+        <canvas id="fireworks"></canvas>
+
+        <div class="countdown" id="countdown"></div>
+
+        <div class="birthday-text" id="birthdayText">
+            <div id="word1" class="birthday-word">Feliz</div>
+            <div id="word2" class="birthday-word">Cumpleaños</div>
+            <div id="word3" class="birthday-name">
+                Mi Sammy bonita<span>♥</span>
+            </div>
+        </div>
+
+        <!-- PERRITO ORIGINAL DIBUJADO EN SVG -->
+        <div class="puppy-section" id="puppySection">
+
+            <div class="birthday-gifs">
+                <img src="img/feliz_cumpleaños.gif" alt="GIF 1" class="birthday-gif">
+                <img src="img/serenata1.gif" alt="GIF 2" class="birthday-gif">
+            </div>
+
+            <div class="birthday-sign">
+                <span>Eres mi más bonita coincidencia✨</span>
+                <span class="sign-heart">♡</span>
+            </div>
+
+            <p class="final-message">
+                Hora locaaaa!!!! Ahora si con ustedes el cantautor y compositor Cristian Miguel y su serenata!!🥳🥳
+            </p>
+
+        </div>
+
+    </section>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

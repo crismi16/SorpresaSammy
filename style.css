@@ -1,0 +1,948 @@
+
+/* ========================================
+   CONFIGURACIÓN GENERAL
+======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+body {
+    background: #f9d4e1;
+}
+
+/* ========================================
+   FONDO Y CORAZONES
+======================================== */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 50% 40%, #fff0f6 0%, transparent 55%),
+        linear-gradient(145deg, #f9d5e2, #f5b9d0);
+}
+
+.heart {
+    position: absolute;
+    bottom: -40px;
+    color: rgba(255, 255, 255, 0.8);
+    animation: floatHeart linear forwards;
+    user-select: none;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) rotate(0);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateY(-110vh) rotate(35deg);
+        opacity: 0;
+    }
+}
+
+/* ========================================
+   INTRODUCCIÓN
+======================================== */
+
+.intro {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    perspective: 1200px;
+    transition:
+        transform 1.5s ease,
+        opacity 1.5s ease;
+}
+
+.intro h1 {
+    color: #a93467;
+    font-size: clamp(25px, 5vw, 36px);
+    text-align: center;
+    margin-bottom: 9px;
+}
+
+.subtitle {
+    color: #b45a7f;
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.intro.entering {
+    transform: scale(9);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ========================================
+   ESCENA 3D
+======================================== */
+
+.scene {
+    position: relative;
+    width: 280px;
+    height: 270px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1200px;
+    touch-action: none;
+}
+
+.gift {
+    position: relative;
+    width: 160px;
+    height: 150px;
+    transform-style: preserve-3d;
+    transform: rotateX(-15deg) rotateY(-25deg);
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.gift:active {
+    cursor: grabbing;
+}
+
+
+
+/* ========================================
+   CUERPO DE LA CAJA
+   Caja cúbica 160 x 150 x 150
+   Acabado champagne perlado
+======================================== */
+
+.gift-body {
+    position: absolute;
+    inset: 0;
+    width: 160px;
+    height: 150px;
+    transform-style: preserve-3d;
+}
+
+/* Acabado uniforme para todas las caras */
+
+.face {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    overflow: hidden;
+
+    /* Esquinas rectas */
+    border-radius: 0;
+
+    border: 1px solid rgba(255,255,255,.65);
+    backface-visibility: hidden;
+
+    /* Mismo tono en todas las caras */
+    background: linear-gradient(
+        135deg,
+        #f9e8cb 0%,
+        #efd3a9 45%,
+        #e8c38e 75%,
+        #f6dfbb 100%
+    );
+
+    box-shadow:
+        inset 3px 3px 12px rgba(255,255,255,.4),
+        inset -3px -3px 10px rgba(150,105,55,.08);
+}
+
+/* Frente */
+
+.front {
+    width: 160px;
+    height: 150px;
+    transform:
+        translate(-50%, -50%)
+        translateZ(75px);
+}
+
+/* Parte posterior */
+
+.back {
+    width: 160px;
+    height: 150px;
+    transform:
+        translate(-50%, -50%)
+        rotateY(180deg)
+        translateZ(75px);
+}
+
+/* Lateral derecho */
+
+.right {
+    width: 150px;
+    height: 150px;
+    transform:
+        translate(-50%, -50%)
+        rotateY(90deg)
+        translateZ(80px);
+}
+
+/* Lateral izquierdo */
+
+.left {
+    width: 150px;
+    height: 150px;
+    transform:
+        translate(-50%, -50%)
+        rotateY(-90deg)
+        translateZ(80px);
+}
+
+/* Parte superior */
+
+.top {
+    width: 160px;
+    height: 150px;
+    transform:
+        translate(-50%, -50%)
+        rotateX(90deg)
+        translateZ(75px);
+}
+
+/* Parte inferior */
+
+.bottom {
+    width: 160px;
+    height: 150px;
+    transform:
+        translate(-50%, -50%)
+        rotateX(-90deg)
+        translateZ(75px);
+}
+
+/* Número 16 debajo de la caja */
+.number {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: 900;
+    color: #d8794e;
+    text-shadow: 0 2px 5px rgba(100,40,20,.35);
+}
+
+/* ========================================
+   CINTAS DEL CUERPO
+======================================== */
+
+.ribbon {
+    position: absolute;
+    z-index: 3;
+    background: linear-gradient(
+        90deg,
+        #bd5938 0%,
+        #d8794e 30%,
+        #e69a6c 50%,
+        #d8794e 70%,
+        #bd5938 100%
+    );
+    box-shadow:
+        inset 1px 0 4px rgba(255,255,255,.6),
+        0 0 5px rgba(150,70,40,.12);
+}
+
+/* Cinta en el frente */
+.front .ribbon.vertical {
+    width: 25px;
+    height: 150px;
+    top: 0;
+    left: 67px;
+}
+
+.front .ribbon.horizontal {
+    width: 160px;
+    height: 19px;
+    top: 65px;
+    left: 0;
+}
+
+/* Cintas laterales */
+
+.right .ribbon.vertical,
+.left .ribbon.vertical {
+    width: 24px;
+    height: 150px;
+    left: 63px;
+    top: 0;
+}
+
+.right .ribbon.horizontal,
+.left .ribbon.horizontal {
+    width: 150px;
+    height: 18px;
+    left: 0;
+    top: 66px;
+}
+
+/* Cintas en la parte trasera */
+.back .ribbon.vertical {
+    width: 25px;
+    height: 150px;
+    top: 0;
+    left: 67px;
+}
+
+.back .ribbon.horizontal {
+    width: 160px;
+    height: 19px;
+    top: 65px;
+    left: 0;
+}
+
+/* ========================================
+   TAPA 3D
+   La tapa encaja sobre el cuerpo
+======================================== */
+.lid {
+    position: absolute;
+    z-index: 5;
+    left: 0;
+    top: 0;
+    width: 160px;
+    height: 24px;
+    transform-style: preserve-3d;
+
+    /* Bisagra en el borde posterior */
+    transform-origin: 50% 0% -75px;
+
+    transition:
+        transform 1.2s cubic-bezier(.2,.75,.25,1);
+}
+
+/* Superficie superior de la tapa */
+
+.lid-top-face {
+    position: absolute;
+    width: 160px;
+    height: 150px;
+    left: 50%;
+    top: 50%;
+    overflow: visible;
+    border-radius: 0;
+    transform:
+        translate(-50%, -50%)
+        rotateX(90deg)
+        translateZ(12px);
+
+    background: linear-gradient(
+        135deg,
+        #f9e8cb 0%,
+        #efd3a9 45%,
+        #e8c38e 75%,
+        #f6dfbb 100%
+    );
+
+    border: 1px solid rgba(255,255,255,.65);
+
+    box-shadow:
+        inset 3px 3px 12px rgba(255,255,255,.4),
+        inset -3px -3px 10px rgba(150,105,55,.08);
+}
+
+.lid-cap {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #f9e8cb 0%,
+        #efd3a9 45%,
+        #e8c38e 75%,
+        #f6dfbb 100%
+    );
+
+    border: 1px solid rgba(255,255,255,.65);
+}
+
+/* Frente */
+
+.lid-front-face {
+    width: 160px;
+    height: 24px;
+    transform: translate(-50%, -50%) translateZ(75px);
+}
+
+/* Posterior */
+
+.lid-back-face {
+    width: 160px;
+    height: 24px;
+    transform:
+        translate(-50%, -50%)
+        rotateY(180deg)
+        translateZ(75px);
+}
+
+/* Izquierda */
+
+.lid-left-face {
+    width: 150px;
+    height: 24px;
+    transform:
+        translate(-50%, -50%)
+        rotateY(-90deg)
+        translateZ(80px);
+}
+
+/* Derecha */
+
+.lid-right-face {
+    width: 150px;
+    height: 24px;
+    transform:
+        translate(-50%, -50%)
+        rotateY(90deg)
+        translateZ(80px);
+}
+
+
+/* ========================================
+   CINTAS DE LA TAPA
+======================================== */
+
+.lid-ribbon-v,
+.lid-ribbon-h,
+.lid-side-ribbon {
+    position: absolute;
+    z-index: 4;
+    background: linear-gradient(
+        90deg,
+        #bd5938 0%,
+        #d8794e 30%,
+        #e69a6c 50%,
+        #d8794e 70%,
+        #bd5938 100%
+    );
+    box-shadow:
+        inset 0 0 4px rgba(255,255,255,.6);
+}
+
+/* Superficie superior */
+.lid-ribbon-v {
+    width: 25px;
+    height: 150px;
+    left: 67px;
+    top: 0;
+}
+
+.lid-ribbon-h {
+    width: 160px;
+    height: 19px;
+    left: 0;
+    top: 65px;
+}
+
+/* Frente y parte trasera */
+.lid-front-face .lid-side-ribbon,
+.lid-back-face .lid-side-ribbon {
+    width: 25px;
+    height: 24px;
+    left: 67px;
+    top: 0;
+}
+
+/* Laterales derecho e izquierdo */
+.lid-right-face .lid-side-ribbon,
+.lid-left-face .lid-side-ribbon {
+    width: 24px;
+    height: 24px;
+    left: 63px;
+    top: 0;
+}
+
+/* ========================================
+   LAZO 2D PERLADO - SIMÉTRICO
+======================================== */
+
+.flat-bow {
+    position: absolute;
+    width: 110px;
+    height: 45px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    pointer-events: none;
+}
+
+
+/* Lazadas */
+.bow-loop-flat {
+    position: absolute;
+    top: 6px;
+    width: 46px;
+    height: 30px;
+    box-sizing: border-box;
+    border: 2px solid #bd5938;
+    background: linear-gradient(
+        145deg,
+        #f5c4a7,
+        #e69a6c 40%,
+        #d8794e 75%,
+        #f2c3a5
+    );
+    box-shadow:
+        inset 0 2px 5px rgba(255,255,255,.75),
+        inset 0 -3px 5px rgba(150,70,40,.15),
+        0 2px 4px rgba(150,70,40,.12);
+}
+
+/* Lazada izquierda */
+.left-loop {
+    left: 7px;
+    border-radius: 85% 20% 20% 85%;
+    transform: rotate(15deg);
+}
+
+/* Lazada derecha: reflejo simétrico */
+.right-loop {
+    right: 7px;
+    border-radius: 20% 85% 85% 20%;
+    transform: rotate(-15deg);
+}
+
+/* Nudo central */
+.bow-knot-flat {
+    position: absolute;
+    width: 19px;
+    height: 19px;
+    left: 50%;
+    top: 11px;
+    transform: translateX(-50%);
+    z-index: 3;
+    box-sizing: border-box;
+    border-radius: 45% 45% 50% 50%;
+    background: radial-gradient(
+        circle at 35% 25%,
+        #f8d5bd,
+        #e69a6c 45%,
+        #bd5938 100%
+    );
+    border: 1px solid #bd5938;
+    box-shadow:
+        inset 1px 1px 3px rgba(255,255,255,.8),
+        0 2px 4px rgba(150,70,110,.15);
+}
+
+/* ========================================
+   APERTURA DE LA TAPA
+======================================== */
+.gift.open .lid {
+    transform: translateY(-8px) rotateX(115deg);
+}
+
+/* ========================================
+   SOMBRA E INSTRUCCIONES
+======================================== */
+
+.shadow {
+    width: 190px;
+    height: 30px;
+    margin-top: -5px;
+    border-radius: 50%;
+    background: rgba(137, 43, 85, .22);
+    filter: blur(14px);
+}
+
+.instruction {
+    margin-top: 20px;
+    color: #a83e6c;
+    font-size: 14px;
+    text-align: center;
+    animation: hintPulse 2s infinite;
+}
+
+.open-hint {
+    margin-top: 9px;
+    color: #bf5b85;
+    font-size: 13px;
+    text-align: center;
+}
+
+@keyframes hintPulse {
+    50% {
+        opacity: .55;
+        transform: translateY(-3px);
+    }
+}
+
+/* ========================================
+   CELEBRACIÓN
+======================================== */
+
+.celebration {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    background: #050208;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+.celebration.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#fireworks {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+
+/* ========================================
+   CUENTA REGRESIVA
+======================================== */
+
+.countdown {
+    position: fixed;
+    z-index: 100;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    width: 100%;
+    text-align: center;
+
+    color: white;
+    font-size: clamp(85px, 18vw, 150px);
+    font-weight: 900;
+
+    text-shadow:
+        0 0 15px #ff7bac,
+        0 0 35px #ff2e83;
+}
+
+.countdown.pop {
+    animation: countdownPop .9s ease forwards;
+}
+
+@keyframes countdownPop {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(.3);
+    }
+    45% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.25);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+
+/* ========================================
+   FELICITACIÓN
+======================================== */
+
+.birthday-text {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    color: white;
+    font-weight: 900;
+    text-shadow:
+        0 0 12px #ff7bac,
+        0 0 28px #ff2e83;
+
+    transition: opacity 1s ease;
+}
+
+.birthday-word,
+.birthday-name {
+    opacity: 0;
+    transform: scale(.6);
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+
+    font-size: clamp(40px, 9vw, 85px);
+    line-height: 1.25;
+    text-align: center;
+}
+
+.birthday-word.show,
+.birthday-name.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.birthday-name {
+    color: #ffb5d3;
+}
+
+.birthday-name span {
+    color: #ff4d91;
+}
+
+/* ========================================
+   PERRITO Y MENSAJE FINAL
+======================================== */
+
+.puppy-section {
+    position: relative;
+    z-index: 4;
+
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    padding: 20px;
+    text-align: center;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px) scale(.9);
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease,
+        visibility 1.2s ease;
+}
+
+.puppy-section.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.puppy {
+    width: min(280px, 70vw);
+    height: auto;
+    max-height: 38vh;
+    filter: drop-shadow(0 0 15px rgba(255,160,200,.45));
+}
+
+.birthday-sign {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    color: #ffb5d3;
+    font-size: clamp(28px, 6vw, 48px);
+    font-weight: 900;
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 10px #ff7bac,
+        0 0 22px #ff2e83;
+}
+
+.sign-heart {
+    font-size: 30px;
+}
+
+.final-message {
+    max-width: 520px;
+    margin: 0 auto;
+
+    color: #fff2f8;
+    font-size: clamp(15px, 3.5vw, 19px);
+    line-height: 1.6;
+    text-align: center;
+
+    text-shadow: 0 0 8px rgba(255,140,190,.5);
+}
+
+
+/* ========================================
+   CENTRADO GENERAL DE LA CELEBRACIÓN
+======================================== */
+
+.celebration {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: block;
+}
+
+/* Fuegos artificiales de fondo */
+#fireworks {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ========================================
+   CUENTA REGRESIVA - CENTRO
+======================================== */
+
+.countdown {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    z-index: 5;
+
+    transform: translate(-50%, -50%);
+}
+
+@keyframes countdownPop {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(.3);
+    }
+
+    45% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.25);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* ========================================
+   FELIZ CUMPLEAÑOS - CENTRO
+======================================== */
+
+.birthday-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 3;
+
+    transform: translate(-50%, -50%);
+}
+
+/* ========================================
+   PERRITO Y MENSAJE - CENTRO
+======================================== */
+
+.puppy-section {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    width: min(100%, 560px);
+    min-height: 0;
+    height: auto;
+    box-sizing: border-box;
+    margin: 0;
+
+    transform: translate(-50%, -50%) translateY(30px) scale(.9);
+    z-index: 4;
+}
+
+.puppy-section.show {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.birthday-gifs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.birthday-gif {
+    width: min(40vw, 250px);
+    height: auto;
+    max-height: 55vh;
+    object-fit: contain;
+}
+
+/* ========================================
+   ADAPTACIÓN A CELULARES
+======================================== */
+
+@media (max-width: 600px) {
+    .scene {
+        transform: scale(.85);
+    }
+
+    .instruction {
+        padding: 0 15px;
+        font-size: 13px;
+    }
+
+    .puppy-section {
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .puppy {
+        max-height: 32vh;
+    }
+}
+
+@media (max-height: 550px) {
+    .scene {
+        transform: scale(.7);
+    }
+
+    .puppy {
+        max-height: 25vh;
+    }
+}
